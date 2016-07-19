@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pos0.1</title>
+    <script>
+        /**
+         * Created by qiyanzi on 16-7-18.
+         */
+//        document.write("***<没钱赚商店>收据***");
+        let cartItems=[{
+            barcode: 'ITEM000000',
+            name: '可口可乐',
+            unit: '瓶',
+            price: 3.00
+
+        },
+            {
+                barcode: 'ITEM000000',
+                name: '可口可乐',
+                unit: '瓶',
+                price: 3.00
+            },
+            {
+                barcode: 'ITEM000000',
+                name: '可口可乐',
+                unit: '瓶',
+                price: 3.00
+            },
+            {
+                barcode: 'ITEM000000',
+                name: '可口可乐',
+                unit: '瓶',
+                price: 3.00
+            },
+            {
+                barcode: 'ITEM000000',
+                name: '可口可乐',
+                unit: '瓶',
+                price: 3.00
+            },
+            {
+                barcode: 'ITEM000001',
+                name: '雪碧',
+                unit: '瓶',
+                price: 3.00
+            },
+            {
+                barcode: 'ITEM000001',
+                name: '雪碧',
+                unit: '瓶',
+                price: 3.00
+            },
+            {
+                barcode: 'ITEM000004',
+                name: '电池',
+                unit: '个',
+                price: 2.00
+            }
+        ]
+
+
+        printReceipt(cartItems);
+
+        function countNum(cartItems) {
+            let merNum = [];
+
+            for (let i = 0; i < cartItems.length; i++){
+                let existItems = merNum.find(function (item) {
+//                    return item.barcode === cartItems[i].barcode;
+                    if(item.barcode === cartItems[i].barcode)
+                        return item;
+
+                });
+                if (existItems) {
+                    existItems.count++;
+                }
+                else {
+                    merNum.push(Object.assign({},cartItems[i],{count:1}));
+                }
+            }
+            return merNum;
+
+        }
+
+        function calculateSubtotal(merNum) {
+            let merSubtotal = [];
+            let subtotal = 0;
+
+            for(let i = 0;i < merNum.length;i++) {
+                subtotal = merNum[i].count * merNum[i].price;
+                merSubtotal.push(Object.assign({},merNum[i],{subtotal:subtotal}))
+            }
+            return merSubtotal;
+        }
+
+        function calculateTotal(merSubtotal) {
+
+            let total = 0;
+
+            for(let i = 0;i < merSubtotal.length; i++) {
+                total += merSubtotal[i].subtotal;
+            }
+            return total;
+        }
+
+        function printReceipt(cartItems) {
+            let merNum = countNum(cartItems);
+            let subtotal = calculateSubtotal(merNum);
+            let total = calculateTotal(subtotal);
+
+            print(subtotal,total);
+        }
+
+        function print(subtotal,total) {
+            document.write("***<没钱赚商店>收据***");
+            document.write('\n');
+            for (let i = 0;i <subtotal.length;i++) {
+                document.write("名称：" + subtotal[i].name + "，数量：" + subtotal[i].count + "，单价：" + subtotal[i].price + "，小计：" + subtotal[i].subtotal + "\n");
+            }
+            document.write("总计：" + total);
+
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
