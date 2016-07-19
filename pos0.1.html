@@ -7,7 +7,6 @@
         /**
          * Created by qiyanzi on 16-7-18.
          */
-//        document.write("***<没钱赚商店>收据***");
         let cartItems=[{
             barcode: 'ITEM000000',
             name: '可口可乐',
@@ -114,7 +113,7 @@
 
         function print(subtotal,total) {
             document.write("***<没钱赚商店>收据***");
-            document.write('\n');
+            document.write("\n");
             for (let i = 0;i <subtotal.length;i++) {
                 document.write("名称：" + subtotal[i].name + "，数量：" + subtotal[i].count + "，单价：" + subtotal[i].price + "，小计：" + subtotal[i].subtotal + "\n");
             }
